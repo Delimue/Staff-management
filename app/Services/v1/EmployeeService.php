@@ -19,7 +19,18 @@ class EmployeeService {
     }
     
     public function createEmployee($request) {
- 
+        
+        $employee = Employee::create($request->all());
+        
+        $employee->save();
+        
+        return $this->filterEmployees([$employee]);
+    }
+    
+   /* How i did it before 
+    * 
+    public function createEmployee($request) {
+        
         $employee = new Employee();
         $employee->firstName    = $request->input('firstName');
         $employee->lastName     = $request->input('lastName');
@@ -33,7 +44,7 @@ class EmployeeService {
         
         return $this->filterEmployees([$employee]);
     }
-    
+    */
     public function updateEmployee($request, $userName) {
         
         $employee = Employee::where('userName', $userName)->firstOrFail();
